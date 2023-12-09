@@ -6,14 +6,18 @@ from airflow.decorators import dag, task
 from pendulum import datetime
 from airflow.io.path import ObjectStoragePath
 from airflow.models.baseoperator import chain
+from airflow.models.param import Param
+import joblib
+import base64
+import io
 
 OBJECT_STORAGE_INGEST = "s3"
 CONN_ID_INGEST = "my_aws_conn"
-PATH_INGEST = "ce-2-8-examples-bucket/use_case_object_storage/"
+PATH_INGEST = "ce-2-8-examples-bucket/use_case_object_storage/ingest/"
 
-OBJECT_STORAGE_TRAIN = "file"  # "gcs"
-CONN_ID_TRAIN = None  # "my_gcs_conn"
-PATH_TRAIN = "include/train/"  # "ce-2-8-examples-bucket/use_case_object_storage/train"
+OBJECT_STORAGE_TRAIN = "s3"  # "gcs"
+CONN_ID_TRAIN = "my_aws_conn"  # "my_gcs_conn"
+PATH_TRAIN = "ce-2-8-examples-bucket/use_case_object_storage/train/"
 
 OBJECT_STORAGE_ARCHIVE = "file"
 CONN_ID_ARCHIVE = None
@@ -39,6 +43,13 @@ base_path_archive = ObjectStoragePath(
     catchup=False,
     tags=["ObjectStorage"],
     doc_md=__doc__,
+    params={
+        "my_quote": Param(
+            "Time and space are creations of the human mind.",
+            type="string",
+            description="Enter a quote to be classified as Kirk-y or Picard-y.",
+        )
+    },
 )
 def object_storage_use_case():
     @task
@@ -71,9 +82,9 @@ def object_storage_use_case():
         text = bytes.decode("utf-8")
 
         key = file.key
-
-        print(key)
-        return {"label": key.split("/")[-2], "text": text}
+        filename = key.split("/")[-1]
+        label = filename.split("_")[-2]
+        return {"label": label, "text": text}
 
     @task
     def train_model(train_data: list[dict]):
@@ -95,9 +106,27 @@ def object_storage_use_case():
 
         model.fit(X_train, y_train)
 
-        model_params = model.get_params()
+        buffer = io.BytesIO()
+        joblib.dump(model, buffer)
+        buffer.seek(0)
 
-        return model_params
+        encoded_model = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+        return encoded_model
+
+    @task
+    def use_model(encoded_model: str, **context):
+        """Load the model and use it for prediction."""
+        my_quote = context["params"]["my_quote"]
+
+        model_binary = base64.b64decode(encoded_model)
+
+        buffer = io.BytesIO(model_binary)
+        model = joblib.load(buffer)
+
+        predictions = model.predict([my_quote])
+
+        print(f"{my_quote} sounds like it could have been said by {predictions[0]}")
 
     @task
     def copy_files_train_to_archive(src: ObjectStoragePath, dst: ObjectStoragePath):
@@ -105,15 +134,28 @@ def object_storage_use_case():
 
         src.copy(dst=dst)
 
+    @task
+    def empty_train(base: ObjectStoragePath):
+        """Empty the train folder."""
+
+        for file in base.iterdir():
+            file.unlink()
+
+    # call tasks
     files_ingest = list_files_ingest(base=base_path_ingest)
     files_copied = copy_files_ingest_to_train.partial(dst=base_path_train).expand(
         src=files_ingest
     )
     files_train = list_files_train(base=base_path_train)
-    train_data = get_text_from_file.expand(file=files_train)
-    model_params = train_model(train_data=train_data)
-
     chain(files_copied, files_train)
+    train_data = get_text_from_file.expand(file=files_train)
+    encoded_model = train_model(train_data=train_data)
+    use_model(encoded_model=encoded_model)
+    chain(
+        encoded_model,
+        copy_files_train_to_archive(src=base_path_train, dst=base_path_archive),
+        empty_train(base=base_path_train),
+    )
 
 
 object_storage_use_case()
