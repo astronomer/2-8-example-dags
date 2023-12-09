@@ -153,7 +153,7 @@ def object_storage_use_case():
     use_model(encoded_model=encoded_model)
     chain(
         encoded_model,
-        copy_files_train_to_archive(src=base_path_train, dst=base_path_archive),
+        copy_files_train_to_archive.partial(dst=base_path_archive).expand(src=files_train),
         empty_train(base=base_path_train),
     )
 
