@@ -38,7 +38,7 @@ from airflow.models.param import Param
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule="@daily",
+    schedule=None,
     catchup=False,
     doc_md=doc_md_DAG,
     params={
