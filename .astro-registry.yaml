@@ -1,0 +1,8 @@
+# These categories will be applied to all DAGs in the repo.
+categories:
+  - Airflow Fundamentals
+# List of DAGs that should be published to the Astronomer Registry.
+dags:
+  - path: dags/AIP58_object_storage/object_storage_ftp_backend.py
+  - path: dags/AIP58_object_storage/object_storage_list_read_remote.py
+  - path: dags/AIP58_object_storage/object_storage_use_case.py
