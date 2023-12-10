@@ -1,5 +1,17 @@
 """
-## 
+## Move files between object storage system locations in an MLOps pipeline
+
+This DAG shows the basic use of the Airflow 2.8 Object Storage feature to
+copy files between object storage system locations in an MLOps pipeline training
+a Naive Bayes Classifier to distinguish between quotes from Captain Kirk and
+Captain Picard and provide a prediction for a user-supplied quote.
+
+To be able to run this DAG you will need to add the contents of
+`include/ingestion_data_object_store_use_case` to your object storage system, 
+install the relevant provider package for your object storage and define an
+Airflow connection to it.
+If you do not want to use remote storage you can use `file://` for local object
+storage and adjust the paths accordingly.
 """
 
 from airflow.decorators import dag, task
@@ -153,7 +165,9 @@ def object_storage_use_case():
     use_model(encoded_model=encoded_model)
     chain(
         encoded_model,
-        copy_files_train_to_archive.partial(dst=base_path_archive).expand(src=files_train),
+        copy_files_train_to_archive.partial(dst=base_path_archive).expand(
+            src=files_train
+        ),
         empty_train(base=base_path_train),
     )
 
