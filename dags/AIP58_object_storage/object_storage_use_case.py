@@ -138,7 +138,8 @@ def object_storage_use_case():
 
         predictions = model.predict([my_quote])
 
-        print(f"{my_quote} sounds like it could have been said by {predictions[0]}")
+        print(f"The quote: '{my_quote}'") 
+        print(f"sounds like it could have been said by {predictions[0].capitalize()}")
 
     @task
     def copy_files_train_to_archive(src: ObjectStoragePath, dst: ObjectStoragePath):
