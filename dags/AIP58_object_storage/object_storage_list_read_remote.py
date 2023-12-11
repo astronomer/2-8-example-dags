@@ -36,7 +36,7 @@ def object_storage_list_read_remote():
     @task
     def list_files(base_path: ObjectStoragePath) -> list[ObjectStoragePath]:
         """List files in remote object storage."""
-        path = base_path / "poems"
+        path = base_path / "poems/"
         files = [f for f in path.iterdir() if f.is_file()]
         return files
 

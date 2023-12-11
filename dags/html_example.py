@@ -37,7 +37,7 @@ from airflow.models.param import Param
 
 
 @dag(
-    start_date=datetime(2023, 12, 1),
+    start_date=None,
     schedule=None,
     catchup=False,
     doc_md=doc_md_DAG,
@@ -51,7 +51,7 @@ from airflow.models.param import Param
     tags=["HTML DAG Docs"],
 )
 def docs_example_dag():
-    @task
+    @task(on_success_callback=lambda x: print(10 / 0))
     def tell_me_what_to_do(**context):
         num_participants = context["params"]["num_participants"]
         response = requests.get(
