@@ -18,7 +18,7 @@ base_local = ObjectStoragePath(URI)
     start_date=datetime(2023, 12, 1),
     schedule=None,
     catchup=False,
-    tags=["Listeners"],
+    tags=["on_dataset_changed listener", "2-8"],
 )
 def producer_dag():
     @task(
@@ -36,6 +36,7 @@ def producer_dag():
             print(f"Failed to retrieve image. Status code: {r.status_code}")
 
     get_bear(base=base_local)
+
 
 
 producer_dag()

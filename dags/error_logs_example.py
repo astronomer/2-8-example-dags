@@ -4,12 +4,9 @@
 
 from airflow import Dataset
 from airflow.decorators import dag, task
-from airflow.io.path import ObjectStoragePath
 from pendulum import datetime
-import requests
 
-
-URI = "file://include/bears"
+URI = "dataset_to_cause_listener_error"
 MY_DATASET = Dataset(URI)
 
 
@@ -17,17 +14,16 @@ MY_DATASET = Dataset(URI)
     start_date=datetime(2023, 12, 1),
     schedule=None,
     catchup=False,
-    tags=["Listeners"],
+    tags=["Error Logs", "2-8"],
 )
-def listener_test():
+def error_logs_example():
     @task(
         outlets=[MY_DATASET],
     )
-    def get_bear():
-        print("hi")
+    def update_table():
+        print("Hello, world!")
 
-    get_bear()
+    update_table()
 
 
-
-listener_test()
+error_logs_example()

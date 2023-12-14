@@ -29,7 +29,7 @@ base_dst = ObjectStoragePath(f"file://include/poems/")
     start_date=datetime(2023, 12, 1),
     schedule=None,
     catchup=False,
-    tags=["ObjectStorage", "webinar"],
+    tags=["ObjectStorage", "webinar", "2-8"],
     doc_md=__doc__,
 )
 def object_storage_list_read_remote():

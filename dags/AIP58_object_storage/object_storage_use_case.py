@@ -53,7 +53,7 @@ base_path_archive = ObjectStoragePath(
     start_date=datetime(2023, 12, 1),
     schedule=None,
     catchup=False,
-    tags=["ObjectStorage"],
+    tags=["ObjectStorage", "2-8"],
     doc_md=__doc__,
     params={
         "my_quote": Param(

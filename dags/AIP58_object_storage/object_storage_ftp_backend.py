@@ -19,7 +19,7 @@ base_path = ObjectStoragePath("ftp://pub/")
     start_date=datetime(2023, 12, 1),
     schedule=None,
     catchup=False,
-    tags=["ObjectStorage"],
+    tags=["ObjectStorage", "2-8"],
     doc_md=__doc__,
 )
 def object_storage_ftp_backend():

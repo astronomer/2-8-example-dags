@@ -48,7 +48,7 @@ from airflow.models.param import Param
             type="number",
         )
     },
-    tags=["HTML DAG Docs"],
+    tags=["HTML DAG Docs", "2-8"],
 )
 def docs_example_dag():
     @task(on_success_callback=lambda x: print(10 / 0))
