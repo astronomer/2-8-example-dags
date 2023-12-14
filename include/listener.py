@@ -1,9 +1,6 @@
 from airflow import Dataset
 from airflow.listeners import hookimpl
-from airflow.providers.slack.notifications.slack import send_slack_notification
-from airflow.models.taskinstance import TaskInstance
-from airflow.utils.state import TaskInstanceState
-from sqlalchemy.orm.session import Session
+from airflow.providers.slack.hooks.slack_webhook import SlackWebhookHook
 
 
 @hookimpl
@@ -11,17 +8,15 @@ def on_dataset_changed(dataset: Dataset):
     """Execute when dataset change is registered."""
     print("I am always listening for any Dataset changes and I heard that!")
     print("Posting to Slack...")
-    send_slack_notification(
-        slack_conn_id="my_slack_conn",
-        text=f"Dataset {dataset.uri} was changed!",
-        channel="#alerts",
+    hook = SlackWebhookHook(slack_webhook_conn_id="slack_webhook_conn")
+    hook.send(
+        text=f"A dataset was changed! {dataset.uri}."
     )
-    print(10 / 0)
     print("Done!")
-    if dataset.uri == "s3://my-bucket/my-dataset.csv":
-        print("This is a dataset I am interested in!")
-        print("Let's do something else...")
-        print("Done!")
+    # if dataset.uri == "dataset_to_cause_listener_error":
+    #     print("Oh no! That's the dataset that causes an error!")
+    #     print("I will cause an error now...")
+    #     print(10 / 0)
 
 
 @hookimpl
