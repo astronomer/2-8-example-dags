@@ -9,9 +9,6 @@ from airflow.decorators import dag, task
 from pendulum import datetime
 from airflow.models.param import Param
 import requests
-from airflow.providers.slack.notifications.slack_webhook import (
-    send_slack_webhook_notification,
-)
 
 
 @dag(
@@ -24,15 +21,10 @@ from airflow.providers.slack.notifications.slack_webhook import (
         )
     },
     doc_md=__doc__,
-    tags=["XCom tab", "2-8"],
+    tags=["XCom tab", "2-8", "core"],
 )
 def xcom_tab_example():
-    @task(
-        on_success_callback=send_slack_webhook_notification(
-            slack_webhook_conn_id="slack_webhook_conn",
-            text=f"A dataset was changed!",
-        )
-    )
+    @task
     def get_fruit_info(**context):
         my_fruit = context["params"]["my_fruit"]
 

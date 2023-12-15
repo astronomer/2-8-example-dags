@@ -19,7 +19,7 @@ from airflow.models.param import Param
         "dog_is_happy_pre_treats": Param(False, type="boolean"),
     },
     doc_md=__doc__,
-    tags=["UI", "2-8"],
+    tags=["UI", "2-8", "core"],
 )
 def trigger_with_params():
     @task

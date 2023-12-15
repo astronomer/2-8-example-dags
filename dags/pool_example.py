@@ -22,7 +22,7 @@ MY_POOL_NAME = "my_garden_pool"
         )
     },
     doc_md=__doc__,
-    tags=["Pools", "2-8"],
+    tags=["Pools", "2-8", "core"],
 )
 def pool_example():
     @task

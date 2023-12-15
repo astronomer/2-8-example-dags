@@ -25,13 +25,13 @@ def on_dataset_changed(dataset: Dataset):
     hook = SlackWebhookHook(slack_webhook_conn_id=SLACK_CONN_ID)
     hook.send(text=f"A dataset was changed!")
     print("Done!")
-    # if dataset.uri == "file://include/bears":
-    #     print("Oh! This is the bears dataset!")
-    #     print("Bears are great :)")
-    #     start_date = datetime.now().date()
-    #     end_date = datetime(2024, 10, 4).date()
-    #     days_until = (end_date - start_date).days
-    #     print(f"Only approximately {days_until} days until fat bear week!")
+    if dataset.uri == "file://include/bears":
+        print("Oh! This is the bears dataset!")
+        print("Bears are great :)")
+        start_date = datetime.now().date()
+        end_date = datetime(2024, 10, 4).date()
+        days_until = (end_date - start_date).days
+        print(f"Only approximately {days_until} days until fat bear week!")
 
 
 @hookimpl

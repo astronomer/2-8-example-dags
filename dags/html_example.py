@@ -48,7 +48,7 @@ from airflow.models.param import Param
         )
     },
     doc_md=doc_md_DAG,
-    tags=["HTML DAG Docs", "2-8"],
+    tags=["HTML DAG Docs", "2-8", "core"],
 )
 def docs_example_dag():
     @task

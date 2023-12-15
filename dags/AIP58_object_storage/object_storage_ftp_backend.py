@@ -20,7 +20,7 @@ base_path = ObjectStoragePath("ftp://pub/")
     schedule="0 0 * * 0",
     catchup=False,
     doc_md=__doc__,
-    tags=["ObjectStorage", "2-8"],
+    tags=["ObjectStorage", "2-8", "core"],
 )
 def object_storage_ftp_backend():
     @task

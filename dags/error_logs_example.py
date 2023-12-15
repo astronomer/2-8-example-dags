@@ -7,7 +7,6 @@ Run this DAG at your own risk!
 """
 
 from airflow.decorators import dag, task
-from pendulum import datetime
 import numpy as np
 
 
@@ -16,7 +15,7 @@ import numpy as np
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["Error Logs", "2-8"],
+    tags=["Error Logs", "2-8", "core"],
 )
 def error_logs_example():
     @task

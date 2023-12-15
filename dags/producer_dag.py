@@ -24,7 +24,7 @@ base_local = ObjectStoragePath(URI)
     schedule="0 0 * * 0",
     catchup=False,
     doc_md=__doc__,
-    tags=["on_dataset_changed listener", "2-8"],
+    tags=["on_dataset_changed listener", "2-8", "core"],
 )
 def producer_dag():
     @task(

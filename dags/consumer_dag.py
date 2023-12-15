@@ -18,7 +18,7 @@ MY_DATASET = Dataset(URI)
     schedule=[MY_DATASET],
     catchup=False,
     doc_md=__doc__,
-    tags=["helper", "2-8"],
+    tags=["helper", "2-8", "core"],
 )
 def consumer_dag():
     @task
