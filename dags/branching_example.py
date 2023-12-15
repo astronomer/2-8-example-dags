@@ -28,16 +28,16 @@ PATH_TO_PYTHON_BINARY = sys.executable
 
 @dag(
     start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    schedule="0 0 * * 0",
     catchup=False,
-    schedule="@daily",
     params={
         "my_number": Param(
             23, type="number", description="Hello! Pick a number, any number!"
         ),
     },
-    tags=["@task.branch_external_python", " @task.branch_virtualenv", "2-8"],
     orientation="TB",
     doc_md=__doc__,
+    tags=["@task.branch_external_python", " @task.branch_virtualenv", "2-8"],
 )
 def branching_example():
     run_this_first = EmptyOperator(task_id="run_this_first", pool="my_garden_pool")

@@ -6,16 +6,16 @@ error log forwarding with the `task_context_logger`.
 Run this DAG at your own risk!
 """
 
-
 from airflow.decorators import dag, task
 from pendulum import datetime
 import numpy as np
 
 
 @dag(
-    start_date=datetime(2023, 12, 1),
+    start_date=None,  # In Airflow 2.8 you don't have to provide a start_date if the schedule is None
     schedule=None,
     catchup=False,
+    doc_md=__doc__,
     tags=["Error Logs", "2-8"],
 )
 def error_logs_example():

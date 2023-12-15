@@ -13,12 +13,13 @@ from airflow.models.param import Param
     start_date=datetime(2023, 4, 18),
     schedule=None,
     catchup=False,
-    tags=["UI", "2-8"],
     params={
         "dog_name": Param("Avery", type="string", maxLength=50),
         "number_of_treats": Param(5, type="integer", minimum=3),
-        "dog_is_happy_pre_treats": Param(False, type="boolean")
+        "dog_is_happy_pre_treats": Param(False, type="boolean"),
     },
+    doc_md=__doc__,
+    tags=["UI", "2-8"],
 )
 def trigger_with_params():
     @task
@@ -28,8 +29,7 @@ def trigger_with_params():
 
         print(f"{dog} is getting {num} treats!")
 
-
-    @task 
+    @task
     def assess_dog_state(**context):
         pre_treats_dog_state = context["params"]["dog_is_happy_pre_treats"]
         dog = context["params"]["dog_name"]
@@ -37,7 +37,6 @@ def trigger_with_params():
             print(f"{dog} even happier now!")
         else:
             print(f"{dog} is happy now!")
-
 
     give_treats() >> assess_dog_state()
 

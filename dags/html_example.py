@@ -37,10 +37,9 @@ from airflow.models.param import Param
 
 
 @dag(
-    start_date=None,
+    start_date=None,  # In Airflow 2.8 you don't have to provide a start_date if the schedule is None
     schedule=None,
     catchup=False,
-    doc_md=doc_md_DAG,
     params={
         "num_participants": Param(
             1,
@@ -48,6 +47,7 @@ from airflow.models.param import Param
             type="number",
         )
     },
+    doc_md=doc_md_DAG,
     tags=["HTML DAG Docs", "2-8"],
 )
 def docs_example_dag():

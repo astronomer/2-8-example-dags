@@ -23,8 +23,9 @@ PATH_DST = "s3://ce-2-8-examples-bucket/lyrics_copy/mensch_copy.txt"
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule=None,
+    schedule="0 0 * * 0",
     catchup=False,
+    doc_md=__doc__,
     tags=["ObjectStorage", "2-8"],
 )
 def object_storage_FileTransferOperator():

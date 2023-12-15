@@ -21,10 +21,10 @@ base = ObjectStoragePath(f"{OBJECT_STORAGE}://{PATH}", conn_id=CONN_ID)
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule=None,
+    schedule="0 0 * * 0",
     catchup=False,
-    tags=["ObjectStorage", "2-8"],
     doc_md=__doc__,
+    tags=["ObjectStorage", "2-8"],
 )
 def object_storage_showcase():
     @task

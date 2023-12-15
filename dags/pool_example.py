@@ -1,3 +1,9 @@
+"""
+## DAG to showcase Airflow pools
+
+This DAG uses a simple pool to limit the number of concurrent tasks.
+"""
+
 from airflow.decorators import dag, task
 from pendulum import datetime
 from airflow.models.param import Param
@@ -10,12 +16,13 @@ MY_POOL_NAME = "my_garden_pool"
     start_date=datetime(2023, 12, 1),
     schedule=None,
     catchup=False,
-    tags=["Pools", "2-8"],
     params={
         "num_guests": Param(
             23, description="How many people are at your garden party?", type="number"
         )
     },
+    doc_md=__doc__,
+    tags=["Pools", "2-8"],
 )
 def pool_example():
     @task

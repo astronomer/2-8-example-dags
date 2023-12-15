@@ -51,10 +51,8 @@ base_path_archive = ObjectStoragePath(
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule=None,
+    schedule="0 0 * * 0",
     catchup=False,
-    tags=["ObjectStorage", "2-8"],
-    doc_md=__doc__,
     params={
         "my_quote": Param(
             "Time and space are creations of the human mind.",
@@ -62,6 +60,8 @@ base_path_archive = ObjectStoragePath(
             description="Enter a quote to be classified as Kirk-y or Picard-y.",
         )
     },
+    doc_md=__doc__,
+    tags=["ObjectStorage", "2-8"],
 )
 def object_storage_use_case():
     @task
@@ -138,7 +138,7 @@ def object_storage_use_case():
 
         predictions = model.predict([my_quote])
 
-        print(f"The quote: '{my_quote}'") 
+        print(f"The quote: '{my_quote}'")
         print(f"sounds like it could have been said by {predictions[0].capitalize()}")
 
     @task

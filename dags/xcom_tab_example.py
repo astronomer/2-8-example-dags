@@ -1,7 +1,8 @@
 """
 ### Query the Fruityvice API for information about a fruit
 
-This DAG queries the [Fruityvice API](https://www.fruityvice.com/) for information about a fruit. It pushes the information to XCom.
+This DAG queries the [Fruityvice API](https://www.fruityvice.com/) for 
+information about a fruit. It pushes the information to XCom.
 """
 
 from airflow.decorators import dag, task
