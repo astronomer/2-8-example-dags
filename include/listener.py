@@ -1,7 +1,7 @@
 from airflow import Dataset
 from airflow.listeners import hookimpl
 from airflow.providers.slack.hooks.slack_webhook import SlackWebhookHook
-
+from airflow.providers.slack.notifications.slack import send_slack_notification
 
 @hookimpl
 def on_dataset_changed(dataset: Dataset):
@@ -10,13 +10,13 @@ def on_dataset_changed(dataset: Dataset):
     print("Posting to Slack...")
     hook = SlackWebhookHook(slack_webhook_conn_id="slack_webhook_conn")
     hook.send(
-        text=f"A dataset was changed! {dataset.uri}."
+        text=f"A dataset was changed!"
     )
     print("Done!")
-    # if dataset.uri == "dataset_to_cause_listener_error":
-    #     print("Oh no! That's the dataset that causes an error!")
-    #     print("I will cause an error now...")
-    #     print(10 / 0)
+    if dataset.uri == "dataset_to_cause_listener_error":
+        print("Oh no! That's the dataset that causes an error!")
+        print("I will cause an error now...")
+        print(10/0)
 
 
 @hookimpl

@@ -1,15 +1,14 @@
 """
 ## Move a file from one remote object storage to another using the FileTransferOperator
 
-The FileTransferOperator was added in Airflow 2.8 and is a generic operator to move files
-between different object storage systems.
+The FileTransferOperator is part of the common IO provider and
+uses the 2.8 Airflow features ObjectStoragePath under the hood.
 """
 
 from airflow.decorators import dag
 from pendulum import datetime
-
-# from airflow.providers.common.io.operators.file_transfer import FileTransferOperator
-from include.operators.file_transfer import FileTransferOperator
+#from airflow.providers.common.io.operators.file_transfer import FileTransferOperator
+from include.operators.file_transfer import FileTransferOperator  # The common IO provider depends on the 2.8 release
 
 SRC_CONN = "my_aws_conn"
 DST_CONN = "my_aws_conn"
@@ -29,12 +28,13 @@ PATH_DST = "s3://ce-2-8-examples-bucket/lyrics_copy/mensch_copy.txt"
     tags=["ObjectStorage", "2-8"],
 )
 def object_storage_FileTransferOperator():
-    f = FileTransferOperator(
-        task_id="test",
+    FileTransferOperator(
+        task_id="transfer_file",
         source_conn_id=SRC_CONN,
         src=PATH_SRC,
         dest_conn_id=DST_CONN,
         dst=PATH_DST,
+        overwrite=True
     )
 
 

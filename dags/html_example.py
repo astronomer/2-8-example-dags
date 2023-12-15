@@ -51,7 +51,7 @@ from airflow.models.param import Param
     tags=["HTML DAG Docs", "2-8"],
 )
 def docs_example_dag():
-    @task(on_success_callback=lambda x: print(10 / 0))
+    @task
     def tell_me_what_to_do(**context):
         num_participants = context["params"]["num_participants"]
         response = requests.get(

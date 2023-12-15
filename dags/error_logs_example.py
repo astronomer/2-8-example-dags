@@ -1,13 +1,15 @@
 """
+## Cause an OOM ERROR and Zombie in the scheduler to showcase error log forwarding
 
+CAVE: This DAG will cause an OOM error in the scheduler. It is only meant to showcase
+error log forwarding with the `task_context_logger`. 
+Run this DAG at your own risk!
 """
 
-from airflow import Dataset
+
 from airflow.decorators import dag, task
 from pendulum import datetime
-
-URI = "dataset_to_cause_listener_error"
-MY_DATASET = Dataset(URI)
+import numpy as np
 
 
 @dag(
@@ -17,13 +19,13 @@ MY_DATASET = Dataset(URI)
     tags=["Error Logs", "2-8"],
 )
 def error_logs_example():
-    @task(
-        outlets=[MY_DATASET],
-    )
-    def update_table():
-        print("Hello, world!")
+    @task
+    def memory_intensive_task():
+        big_array = []
+        while True:
+            big_array.append(np.zeros((1000, 1000)))
 
-    update_table()
+    memory_intensive_task()
 
 
 error_logs_example()
