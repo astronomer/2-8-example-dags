@@ -7,4 +7,5 @@ dags:
   - path: dags/AIP58_object_storage/object_storage_list_read_remote.py
   - path: dags/AIP58_object_storage/object_storage_use_case.py
   - path: dags/AIP58_object_storage/object_storage_showcase.py
+  - path: dags/AIP58_object_storage/object_storage_load_file_to_duckdb.py
   - path: dags/branching_example.py
