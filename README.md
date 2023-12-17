@@ -53,6 +53,8 @@ The following sections list the DAGs shown sorted by the feature that they showc
 - `pool_example`: a DAG using a pool called `my_garden_pool` to limit the number of tasks running in parallel. You will need to create this pool in the Airflow UI under **Admin > Pools** to run this DAG.
 - `producer_example`: produces to a Dataset to show the `on_dataset_changed` listener. Note that the `on_dataset_changed` listener uses a [Slack Webhook connection](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/connections/slack-incoming-webhook.html) with the ID `slack_webhook_conn`. You will need to create this connection in the Airflow UI under **Admin > Connections** to get Slack notifications from the listener.
 - `xcom_tab_example`: DAG that pushes several XComs to show the new XCom tab in the UI.
+- `deltalake_example`: Shows [Delta Lake](https://delta.io/) table serialization.
+- `literal_wrapper_example`: Shows the `literal` function used to disable Jinja templating in a task parameter.
 
 ### Helpers 
 
