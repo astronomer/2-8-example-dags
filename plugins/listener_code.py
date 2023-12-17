@@ -5,14 +5,13 @@ Learn more about listeners:
 https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners
 """
 
-from airflow import Dataset
+from airflow.datasets import Dataset
 from airflow.listeners import hookimpl
 from airflow.models.taskinstance import TaskInstance
 from airflow.utils.state import TaskInstanceState
 from airflow.providers.slack.hooks.slack_webhook import SlackWebhookHook
 from sqlalchemy.orm.session import Session
 from datetime import datetime
-import time
 
 SLACK_CONN_ID = "slack_webhook_conn"
 

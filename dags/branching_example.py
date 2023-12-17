@@ -37,7 +37,7 @@ PATH_TO_PYTHON_BINARY = sys.executable
     },
     orientation="TB",
     doc_md=__doc__,
-    tags=["@task.branch_external_python", " @task.branch_virtualenv", "2-8", "core"],
+    tags=["@task.branch_external_python", "@task.branch_virtualenv", "2-8", "core"],
 )
 def branching_example():
     run_this_first = EmptyOperator(task_id="run_this_first", pool="my_garden_pool")

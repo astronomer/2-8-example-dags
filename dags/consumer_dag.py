@@ -4,7 +4,7 @@
 This DAG runs on updates to the `include/bears` dataset and prints a message to the logs.
 """
 
-from airflow import Dataset
+from airflow.datasets import Dataset
 from airflow.decorators import dag, task
 from pendulum import datetime
 

@@ -1,5 +1,5 @@
 from airflow.plugins_manager import AirflowPlugin
-from include import listener
+from plugins import listener_code
 
 
 class MyListenerPlugin(AirflowPlugin):
@@ -7,4 +7,4 @@ class MyListenerPlugin(AirflowPlugin):
     # listen to particular events that happen in Airflow, like
     # TaskInstance state changes. Listeners are python modules.
     name = "my_listener_plugin"
-    listeners = [listener]
+    listeners = [listener_code]

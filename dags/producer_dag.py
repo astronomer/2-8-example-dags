@@ -7,7 +7,7 @@ on_dataset_changed listener define as an Airflow Plugin.
 The DAG also shows the difference between a Dataset and ObjectStoragePath.
 """
 
-from airflow import Dataset
+from airflow.datasets import Dataset
 from airflow.decorators import dag, task
 from airflow.io.path import ObjectStoragePath
 from pendulum import datetime
@@ -24,7 +24,7 @@ base_local = ObjectStoragePath(URI)
     schedule="0 0 * * 0",
     catchup=False,
     doc_md=__doc__,
-    tags=["on_dataset_changed listener", "2-8", "core"],
+    tags=["on_dataset_changed listener", "2-8"],
 )
 def producer_dag():
     @task(
