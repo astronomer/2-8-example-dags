@@ -1,9 +1,9 @@
 """
-### DAG that passes a deltalake table through native XCom
+### DAG that passes a Delta Lake table through native XCom
 
-This DAG creates a deltalake table and passes it through native XCom using
-the Airflow 2.8 deltalake serialization.
-Learn more about deltalake: https://github.com/delta-io/delta-rs
+This DAG creates a Delta Lake table and passes it through native XCom using
+the Airflow 2.8 Delta Lake table serialization.
+Learn more about Delta Lake: delta.io
 """
 
 

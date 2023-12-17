@@ -1,5 +1,7 @@
 """
-### 
+### DAG to show the literal wrapper
+
+This DAG shows how to use the literal wrapper to ignore jinja templating.
 """
 
 from airflow.decorators import dag
