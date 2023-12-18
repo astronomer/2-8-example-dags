@@ -87,5 +87,5 @@ This repository contains the following files and folders:
 - `.gitignore`: list of files to ignore for git.
 - `Dockerfile`: the Dockerfile using the Astro CLI. Sets environment variables to change Airflow webserver settings.
 - `packages.txt`: system-level packages to be installed in the Airflow environment upon building of the Docker image. Empty.
-- `README.md`: this Readme.
+- `README.md`: this README.
 - `requirements.txt`: python packages to be installed to be used by DAGs upon building of the Docker image.
