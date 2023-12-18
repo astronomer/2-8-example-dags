@@ -18,7 +18,7 @@ SLACK_CONN_ID = "slack_webhook_conn"
 
 @hookimpl
 def on_dataset_changed(dataset: Dataset):
-    """Execute if a dataset is updated."""
+    """Execute when dataset change is registered."""
     print("I am always listening for any Dataset changes and I heard that!")
     print("Posting to Slack...")
     hook = SlackWebhookHook(slack_webhook_conn_id=SLACK_CONN_ID)

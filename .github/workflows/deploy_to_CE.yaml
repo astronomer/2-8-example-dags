@@ -1,9 +1,7 @@
 name: Astronomer CI - Deploy code to Cosmic Energy
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches: [deploy]
 
 jobs:
