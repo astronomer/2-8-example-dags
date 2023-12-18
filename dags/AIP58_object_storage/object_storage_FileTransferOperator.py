@@ -7,8 +7,7 @@ uses the 2.8 Airflow features ObjectStoragePath under the hood.
 
 from airflow.decorators import dag
 from pendulum import datetime
-#from airflow.providers.common.io.operators.file_transfer import FileTransferOperator
-from include.operators.file_transfer import FileTransferOperator  # The common IO provider depends on the 2.8 release
+from airflow.providers.common.io.operators.file_transfer import FileTransferOperator
 
 SRC_CONN = "my_aws_conn"
 DST_CONN = "my_aws_conn"
@@ -35,7 +34,7 @@ def object_storage_FileTransferOperator():
         src=PATH_SRC,
         dest_conn_id=DST_CONN,
         dst=PATH_DST,
-        overwrite=True
+        overwrite=True,
     )
 
 
