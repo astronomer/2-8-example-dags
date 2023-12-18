@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: github.ref == 'refs/heads/deploy'
     env:
       ## Sets Prod Deployment API credential as an environment variable
       ASTRO_API_TOKEN: ${{ secrets.PROD_ASTRO_API_TOKEN }}
