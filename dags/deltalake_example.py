@@ -37,7 +37,15 @@ def deltalake_example():
         df = deltalake_table.to_pandas()
         print(df)
 
-    print_deltalake_table(deltalake_table=create_deltalake_table())
+    @task
+    def delete_deltalake_table():
+        deltalake_table = DeltaTable("include/deltalake_table")
+        deltalake_table.delete()
+
+    (
+        print_deltalake_table(deltalake_table=create_deltalake_table())
+        >> delete_deltalake_table()
+    )
 
 
 deltalake_example()
