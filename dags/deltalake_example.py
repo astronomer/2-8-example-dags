@@ -12,6 +12,8 @@ from pendulum import datetime
 from deltalake.table import DeltaTable
 from deltalake import write_deltalake
 import pandas as pd
+import os
+import shutil
 
 
 @dag(
@@ -39,8 +41,15 @@ def deltalake_example():
 
     @task
     def delete_deltalake_table():
-        deltalake_table = DeltaTable("include/deltalake_table")
-        deltalake_table.delete()
+        for filename in os.listdir("include/deltalake_table"):
+            file_path = os.path.join("include/deltalake_table", filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print(f"Failed to delete {file_path}. Reason: {e}")
 
     (
         print_deltalake_table(deltalake_table=create_deltalake_table())
