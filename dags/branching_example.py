@@ -39,7 +39,7 @@ PATH_TO_PYTHON_BINARY = sys.executable
     doc_md=__doc__,
     tags=["@task.branch_external_python", "@task.branch_virtualenv", "2-8", "core"],
 )
-def branching_example():
+def new_branching_decorators_example():
     run_this_first = EmptyOperator(task_id="run_this_first", pool="my_garden_pool")
 
     options = ["a", "b", "c", "d"]
@@ -131,4 +131,4 @@ def branching_example():
         random_choice_venv >> Label(option) >> t >> join_venv
 
 
-branching_example()
+new_branching_decorators_example()
