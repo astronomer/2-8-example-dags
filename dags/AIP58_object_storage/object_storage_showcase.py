@@ -10,10 +10,9 @@ from airflow.decorators import dag, task
 from pendulum import datetime
 from airflow.io.path import ObjectStoragePath
 from airflow.models.baseoperator import chain
-import os
 
-OBJECT_STORAGE = "s3"  # "file"
-CONN_ID = "aws_s3_webinar_conn"  # None
+OBJECT_STORAGE = "s3" 
+CONN_ID = "aws_s3_webinar_conn"  
 PATH = "ce-2-8-examples-bucket/poems"
 
 base = ObjectStoragePath(f"{OBJECT_STORAGE}://{PATH}", conn_id=CONN_ID)
@@ -21,10 +20,10 @@ base = ObjectStoragePath(f"{OBJECT_STORAGE}://{PATH}", conn_id=CONN_ID)
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule="0 0 * * 0",
+    schedule="0 0 * * *",
     catchup=False,
     doc_md=__doc__,
-    tags=["ObjectStorage", "2-8"],
+    tags=["ObjectStorage", "2-8", "webinar"],
 )
 def object_storage_showcase():
     @task
@@ -44,6 +43,12 @@ def object_storage_showcase():
     @task
     def print_properties_methods_file(file: ObjectStoragePath):
         """Print object storage properties of a file."""
+
+        # You can mostly use the same API as https://github.com/fsspec/universal_pathlib 
+        # https://docs.python.org/3/library/pathlib.html
+        # with the ObjectStoragePath class.
+        # Plus some Extensions: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html#extensions 
+        # Sometimes there are limits due to the backend. 
 
         print("_____________________________________________________________")
         print(f"File: {file}")

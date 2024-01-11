@@ -51,7 +51,7 @@ base_path_archive = ObjectStoragePath(
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule="0 0 * * 0",
+    schedule="0 0 * * *",
     catchup=False,
     params={
         "my_quote": Param(

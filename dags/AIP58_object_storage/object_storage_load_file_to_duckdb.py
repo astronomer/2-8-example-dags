@@ -17,7 +17,7 @@ base_path = ObjectStoragePath("file://include/")
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule="0 0 * * 0",
+    schedule="0 0 * * *",
     catchup=False,
     doc_md=__doc__,
     tags=["ObjectStorage", "2-8", "core"],

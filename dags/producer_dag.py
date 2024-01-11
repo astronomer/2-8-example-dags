@@ -21,10 +21,10 @@ base_local = ObjectStoragePath(URI)
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule="0 0 * * 0",
+    schedule="0 0 * * *",
     catchup=False,
     doc_md=__doc__,
-    tags=["on_dataset_changed listener", "2-8"],
+    tags=["on_dataset_changed listener", "2-8", "webinar"],
 )
 def producer_dag():
     @task(

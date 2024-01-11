@@ -28,7 +28,7 @@ PATH_TO_PYTHON_BINARY = sys.executable
 
 @dag(
     start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
-    schedule="0 0 * * 0",
+    schedule="0 0 * * *",
     catchup=False,
     params={
         "my_number": Param(

@@ -7,7 +7,7 @@ This DAG runs on updates to the `include/bears` dataset and prints a message to 
 from airflow.datasets import Dataset
 from airflow.decorators import dag, task
 from pendulum import datetime
-
+import time
 
 URI = "file://include/bears"
 MY_DATASET = Dataset(URI)
@@ -18,11 +18,12 @@ MY_DATASET = Dataset(URI)
     schedule=[MY_DATASET],
     catchup=False,
     doc_md=__doc__,
-    tags=["helper", "2-8", "core"],
+    tags=["helper", "2-8", "core", "webinar"],
 )
 def consumer_dag():
     @task
     def celebrate_bears():
+        time.sleep(20)
         print("Yay Bears!!")
 
     celebrate_bears()

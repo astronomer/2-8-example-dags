@@ -17,17 +17,21 @@ from airflow.decorators import dag, task
 from pendulum import datetime
 from airflow.io.path import ObjectStoragePath
 
-OBJECT_STORAGE = "s3"
-CONN_ID = "aws_s3_webinar_conn"
-PATH = "ce-2-8-examples-bucket"
+OBJECT_STORAGE_SRC = "s3"
+CONN_ID_SRC = "aws_s3_webinar_conn"
+KEY_SRC = "ce-2-8-examples-bucket"
 
-base_src = ObjectStoragePath(f"{OBJECT_STORAGE}://{PATH}", conn_id=CONN_ID)
-base_dst = ObjectStoragePath(f"file://include/poems/")
+OBJECT_STORAGE_DST = "file"
+CONN_ID_DST = None
+KEY_DST = "include/poems/"
+
+base_src = ObjectStoragePath(f"{OBJECT_STORAGE_SRC}://{KEY_SRC}", conn_id=CONN_ID_SRC)
+base_dst = ObjectStoragePath(f"{OBJECT_STORAGE_DST}://{KEY_DST}", conn_id=CONN_ID_DST)
 
 
 @dag(
     start_date=datetime(2023, 12, 1),
-    schedule="0 0 * * 0",
+    schedule="0 0 * * *",
     catchup=False,
     doc_md=__doc__,
     tags=["ObjectStorage", "webinar", "2-8"],

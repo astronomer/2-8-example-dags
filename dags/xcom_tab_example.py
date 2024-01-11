@@ -12,7 +12,7 @@ import requests
 
 
 @dag(
-    start_date=datetime(2023, 12, 1),
+    start_date=None,
     schedule=None,
     catchup=False,
     params={
@@ -21,7 +21,7 @@ import requests
         )
     },
     doc_md=__doc__,
-    tags=["XCom tab", "2-8", "core"],
+    tags=["XCom tab", "2-8", "core", "webinar"],
 )
 def xcom_tab_example():
     @task
