@@ -18,7 +18,7 @@ from pendulum import datetime
 from airflow.io.path import ObjectStoragePath
 
 OBJECT_STORAGE = "s3"
-CONN_ID = "my_aws_conn"
+CONN_ID = "aws_s3_webinar_conn"
 PATH = "ce-2-8-examples-bucket"
 
 base_src = ObjectStoragePath(f"{OBJECT_STORAGE}://{PATH}", conn_id=CONN_ID)

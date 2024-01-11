@@ -24,11 +24,11 @@ import base64
 import io
 
 OBJECT_STORAGE_INGEST = "s3"
-CONN_ID_INGEST = "my_aws_conn"
+CONN_ID_INGEST = "aws_s3_webinar_conn"
 PATH_INGEST = "ce-2-8-examples-bucket/use_case_object_storage/ingest/"
 
 OBJECT_STORAGE_TRAIN = "s3"  # "gcs"
-CONN_ID_TRAIN = "my_aws_conn"  # "my_gcs_conn"
+CONN_ID_TRAIN = "aws_s3_webinar_conn"  # "my_gcs_conn"
 PATH_TRAIN = "ce-2-8-examples-bucket/use_case_object_storage/train/"
 
 OBJECT_STORAGE_ARCHIVE = "file"

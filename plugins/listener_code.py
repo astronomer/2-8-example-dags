@@ -13,7 +13,7 @@ from airflow.providers.slack.hooks.slack_webhook import SlackWebhookHook
 from sqlalchemy.orm.session import Session
 from datetime import datetime
 
-SLACK_CONN_ID = "slack_webhook_conn"
+SLACK_CONN_ID = "slack_tjf_sandbox_webhook_conn"
 
 
 @hookimpl

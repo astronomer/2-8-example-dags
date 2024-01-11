@@ -6,3 +6,5 @@ logs/
 .venv
 airflow.db
 airflow.cfg
+include/duckdb.db 
+include/duck_info_parquet

@@ -9,8 +9,8 @@ from airflow.decorators import dag
 from pendulum import datetime
 from airflow.providers.common.io.operators.file_transfer import FileTransferOperator
 
-SRC_CONN = "my_aws_conn"
-DST_CONN = "my_aws_conn"
+SRC_CONN = "aws_s3_webinar_conn"
+DST_CONN = "aws_s3_webinar_conn"
 PATH_SRC = "s3://ce-2-8-examples-bucket/lyrics/mensch.txt"
 PATH_DST = "s3://ce-2-8-examples-bucket/lyrics_copy/mensch_copy.txt"
 

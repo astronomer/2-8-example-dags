@@ -1,4 +1,4 @@
-FROM quay.io/astronomer/astro-runtime:10.0.0
+FROM quay.io/astronomer/astro-runtime:10.1.0-python-3.11
 
 ENV AIRFLOW__WEBSERVER__ALLOW_RAW_HTML_DESCRIPTIONS=True
 ENV AIRFLOW__WEBSERVER__NAVBAR_COLOR="#1a2e1e"

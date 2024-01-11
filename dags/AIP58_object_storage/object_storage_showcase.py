@@ -13,7 +13,7 @@ from airflow.models.baseoperator import chain
 import os
 
 OBJECT_STORAGE = "s3"  # "file"
-CONN_ID = "my_aws_conn"  # None
+CONN_ID = "aws_s3_webinar_conn"  # None
 PATH = "ce-2-8-examples-bucket/poems"
 
 base = ObjectStoragePath(f"{OBJECT_STORAGE}://{PATH}", conn_id=CONN_ID)
