@@ -42,7 +42,7 @@ def object_storage_list_read_remote():
         """List files in remote object storage."""
         path = base_path / "poems/"
         files = [f for f in path.iterdir() if f.is_file()]
-        return files
+        return files  # list of ObjectStoragePath objects, serializeable!
 
     @task
     def copy_file_to_local(dst: ObjectStoragePath, file: ObjectStoragePath):

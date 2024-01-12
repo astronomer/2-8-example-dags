@@ -22,7 +22,7 @@ def on_dataset_changed(dataset: Dataset):
     print("I am always listening for any Dataset changes and I heard that!")
     print("Posting to Slack...")
     hook = SlackWebhookHook(slack_webhook_conn_id=SLACK_CONN_ID)
-    hook.send(text=f"A dataset was changed!")
+    hook.send(text="A dataset was changed!")
     print("Done!")
     if dataset.uri == "file://include/bears":
         print("Oh! This is the bears dataset!")

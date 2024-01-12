@@ -19,13 +19,14 @@ PATH_DST = "s3://ce-2-8-examples-bucket/lyrics_copy/mensch_copy.txt"
 # PATH_SRC = ObjectStoragePath("s3://ce-2-8-examples-bucket/lyrics/mensch.txt", conn_id="my_aws_conn")
 # PATH_DST = ObjectStoragePath("s3://ce-2-8-examples-bucket/lyrics_copy/mensch_copy.txt", conn_id="my_aws_conn")
 
+# tip: using Object Storage within the same file storage uses the optimal path, no data is passed through the worker
 
 @dag(
     start_date=datetime(2023, 12, 1),
     schedule="0 0 * * *",
     catchup=False,
     doc_md=__doc__,
-    tags=["ObjectStorage", "2-8", "webinar"],
+    tags=["ObjectStorage", "2-8", "webinar", "Common IO Provider"],
 )
 def object_storage_FileTransferOperator():
     FileTransferOperator(
@@ -34,7 +35,7 @@ def object_storage_FileTransferOperator():
         src=PATH_SRC,
         dest_conn_id=DST_CONN,
         dst=PATH_DST,
-        overwrite=True
+        overwrite=True,
     )
 
 

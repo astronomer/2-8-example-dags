@@ -11,7 +11,6 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow.operators.empty import EmptyOperator
 from airflow.models.baseoperator import chain
-import tempfile
 
 
 @dag(
@@ -52,7 +51,7 @@ def simple_venv_branching_example():
         task_id="start_cooking", trigger_rule="none_failed_min_one_success"
     )
 
-    @task.branch_virtualenv(requirements=["numpy~=1.24.4"])
+    @task.branch_virtualenv(requirements=["numpy==1.24.4"])
     def decide_on_vegetable() -> str:
         import numpy as np
 
