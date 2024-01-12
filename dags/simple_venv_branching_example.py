@@ -55,7 +55,7 @@ def simple_venv_branching_example():
     def decide_on_vegetable() -> str:
         import numpy as np
 
-        choices = ["spinach", "broccoli", "peas"]
+        choices = ["spinach", "broccoli", "tomatoes"]
         my_vegetable = np.random.choice(choices, 1)
 
         return f"buy_{my_vegetable[0]}"
